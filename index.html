@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grupo SIGELEC | Soluciones eléctricas integrales para la industria</title>
+<meta name="description" content="Grupo SIGELEC: distribución de material eléctrico, representaciones, planta de fabricación de tableros y proyectos eléctricos integrales en Perú desde 1995. Certificación ISO 9001.">
+<link rel="icon" href="https://gruposigelec.com.pe/assets/imagenes/icon-GS.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+:root{
+  --navy:#004a8f;
+  --navy-900:#031b36;
+  --navy-800:#062a52;
+  --navy-700:#0b3a6e;
+  --amarillo:#ffcb05;
+  --amarillo-suave:#fff4c2;
+  --tinta:#0d1b2e;
+  --gris:#5d6b7e;
+  --linea:#e3e8f0;
+  --fondo:#f5f7fb;
+  --blanco:#fff;
+  --ancho:1200px;
+  --radio:24px;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --fuente:"Plus Jakarta Sans",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--fuente);color:var(--tinta);background:var(--blanco);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit}
+.envoltura{width:min(var(--ancho),100% - 32px);margin-inline:auto}
+h1,h2,h3{line-height:1.1;letter-spacing:-.025em;font-weight:800}
+
+/* Sistema de encabezados de sección (único para toda la página) */
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--navy)}
+.eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--amarillo);box-shadow:0 0 0 4px rgba(255,203,5,.22)}
+.titulo-sec{font-size:clamp(2rem,3.4vw,2.8rem);margin-top:16px}
+.intro-sec{color:var(--gris);font-size:1.05rem;max-width:460px}
+.cabeza-sec{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;margin-bottom:56px}
+.seccion{padding:112px 0}
+
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 26px;border-radius:999px;font-weight:700;font-size:.95rem;transition:transform .25s var(--ease),background .25s,box-shadow .25s,border-color .25s}
+.btn svg{width:18px;height:18px;transition:transform .25s var(--ease)}
+.btn:hover svg{transform:translateX(4px)}
+.btn-amarillo{background:var(--amarillo);color:var(--navy-900)}
+.btn-amarillo:hover{box-shadow:0 12px 30px -10px rgba(255,203,5,.7);transform:translateY(-1px)}
+.btn-linea{border:1.5px solid rgba(255,255,255,.28);color:#fff}
+.btn-linea:hover{border-color:#fff}
+.btn-navy{background:var(--navy-900);color:#fff}
+.btn-navy:hover{background:var(--navy)}
+
+/* ---------- Cargador ---------- */
+#cargador{display:none}
+.js #cargador{display:grid;place-items:center;position:fixed;inset:0;z-index:100;background:var(--navy-900);transition:transform 1s cubic-bezier(.76,0,.24,1)}
+#cargador::after{content:"";position:absolute;left:0;right:0;bottom:0;height:6px;background:var(--amarillo);transform:scaleX(var(--p,0));transform-origin:left;transition:transform .2s linear}
+#cargador.fuera{transform:translateY(-100%)}
+.js body.cargando{overflow:hidden}
+.carga-centro{display:grid;justify-items:center;gap:30px;transition:opacity .4s,transform .6s var(--ease)}
+#cargador.fuera .carga-centro{opacity:0;transform:translateY(-40px)}
+.carga-circuito{width:min(340px,78vw);overflow:visible}
+.carga-circuito .via{fill:none;stroke:rgba(255,255,255,.14);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.carga-circuito .corriente{fill:none;stroke:var(--amarillo);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:420;stroke-dashoffset:420;filter:drop-shadow(0 0 6px rgba(255,203,5,.8));animation:dibujar 1.3s .15s cubic-bezier(.6,0,.3,1) forwards}
+.carga-circuito .foco{fill:transparent;stroke:rgba(255,255,255,.25);stroke-width:3;animation:encender .5s 1.35s ease-out forwards}
+.carga-circuito .halo{fill:var(--amarillo);opacity:0;transform-origin:300px 40px;animation:halo 1.4s 1.45s ease-out infinite}
+@keyframes dibujar{to{stroke-dashoffset:0}}
+@keyframes encender{to{fill:var(--amarillo);stroke:var(--amarillo)}}
+@keyframes halo{0%{opacity:.5;transform:scale(1)}100%{opacity:0;transform:scale(2.6)}}
+.carga-logo{height:46px;width:auto;border-radius:5px;opacity:0;transform:translateY(10px);animation:subir .7s 1.5s var(--ease) forwards}
+.carga-txt{font-size:.78rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.55);font-variant-numeric:tabular-nums}
+.carga-txt b{color:#fff;font-weight:700}
+@keyframes subir{to{opacity:1;transform:none}}
+
+/* ---------- Header ---------- */
+.cabecera{position:fixed;inset:0 0 auto;z-index:50;transition:background .3s,box-shadow .3s}
+.cabecera.solida{background:rgba(3,27,54,.9);backdrop-filter:blur(14px);box-shadow:0 1px 0 rgba(255,255,255,.07)}
+.cabecera .envoltura{display:flex;align-items:center;justify-content:space-between;height:80px;gap:24px}
+.logo img{height:40px;width:auto;border-radius:4px}
+.menu{display:flex;align-items:center;gap:2px}
+.menu a{color:rgba(255,255,255,.78);font-size:.92rem;font-weight:600;padding:8px 14px;border-radius:999px;transition:color .2s,background .2s}
+.menu a:hover{color:#fff;background:rgba(255,255,255,.07)}
+.menu a.activo{color:#fff;background:rgba(255,255,255,.1)}
+.cabecera .btn{padding:11px 20px;font-size:.88rem}
+.hamburguesa{display:none;background:none;border:0;color:#fff;width:44px;height:44px;cursor:pointer}
+.hamburguesa svg{width:26px;height:26px}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;background:radial-gradient(90% 80% at 80% 20%,#0a3d78 0%,var(--navy-800) 45%,var(--navy-900) 100%);color:#fff;padding:160px 0 0;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(70% 70% at 75% 35%,#000 20%,transparent 75%);pointer-events:none}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.hero .eyebrow{color:rgba(255,255,255,.75)}
+.hero h1{font-size:clamp(2.6rem,5vw,4.2rem);margin:22px 0 22px;letter-spacing:-.035em}
+.hero h1 span{color:var(--amarillo)}
+.hero .lead{font-size:1.1rem;color:rgba(255,255,255,.72);max-width:500px}
+.hero-acciones{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+
+.tablero{position:relative;border-radius:28px;padding:28px 24px 20px;background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 40px 80px -40px rgba(0,0,0,.6)}
+.tablero-tit{display:flex;justify-content:space-between;align-items:center;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:6px}
+.tablero-tit i{font-style:normal;display:inline-flex;align-items:center;gap:8px;color:#8fe3a8}
+.tablero-tit i::before{content:"";width:7px;height:7px;border-radius:50%;background:#4ade80;box-shadow:0 0 10px #4ade80;animation:latido 2s infinite}
+.diagrama{width:100%;height:auto;overflow:visible}
+.diagrama .base{stroke:rgba(255,255,255,.2);stroke-width:2.5;fill:none;stroke-linecap:round}
+.diagrama .barra{stroke:rgba(255,255,255,.4);stroke-width:5}
+.diagrama .pulso{stroke:var(--amarillo);stroke-width:3.5;fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:30 300;filter:drop-shadow(0 0 6px rgba(255,203,5,.9));animation:flujo 3.6s linear infinite}
+.diagrama .trafo{fill:var(--navy-800);stroke:var(--amarillo);stroke-width:2.5}
+.diagrama .carga rect{fill:rgba(255,255,255,.05);stroke:rgba(255,255,255,.3);stroke-width:1.5;transition:fill .3s,stroke .3s}
+.diagrama .carga{cursor:pointer}
+.diagrama .carga:hover rect,.diagrama .carga:focus rect{fill:rgba(255,203,5,.14);stroke:var(--amarillo)}
+.diagrama .carga:focus{outline:none}
+.diagrama text{font-family:var(--fuente);font-size:12px;font-weight:700;fill:rgba(255,255,255,.88)}
+.diagrama .num{font-size:11px;fill:var(--amarillo);letter-spacing:.08em}
+.diagrama .rot{font-size:10px;font-weight:600;fill:rgba(255,255,255,.45);letter-spacing:.12em}
+.diagrama .nodo{fill:var(--amarillo);animation:latido 2.4s ease-in-out infinite}
+@keyframes flujo{from{stroke-dashoffset:330}to{stroke-dashoffset:0}}
+@keyframes latido{0%,100%{opacity:.45}50%{opacity:1}}
+
+.hero-sellos{position:relative;display:grid;grid-template-columns:repeat(4,1fr);margin-top:88px;border-top:1px solid rgba(255,255,255,.1)}
+.sello{padding:28px 28px 32px 0}
+.sello+.sello{padding-left:28px;border-left:1px solid rgba(255,255,255,.1)}
+.sello strong{display:block;font-size:1.5rem;font-weight:800;letter-spacing:-.02em}
+.sello span{font-size:.88rem;color:rgba(255,255,255,.58)}
+
+/* ---------- Unidades (pestañas) ---------- */
+.uni{display:grid;grid-template-columns:5fr 7fr;gap:32px;align-items:start}
+.uni-tabs{display:grid;gap:10px}
+.uni-tab{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:18px;text-align:left;width:100%;padding:22px 24px;border-radius:20px;border:1px solid var(--linea);background:var(--blanco);cursor:pointer;transition:background .35s var(--ease),border-color .35s,box-shadow .35s,transform .35s var(--ease)}
+.uni-tab:hover{border-color:#c9d3e2;transform:translateX(4px)}
+.uni-tab .n{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-weight:800;font-size:.88rem;background:var(--fondo);color:var(--navy);transition:background .35s,color .35s}
+.uni-tab strong{display:block;font-size:1.08rem;font-weight:700;letter-spacing:-.01em}
+.uni-tab small{display:block;font-size:.86rem;color:var(--gris);margin-top:2px;transition:color .35s}
+.uni-tab svg{width:20px;height:20px;color:var(--gris);transition:transform .35s var(--ease),color .35s}
+.uni-tab[aria-selected="true"]{background:var(--navy-900);border-color:var(--navy-900);color:#fff;box-shadow:0 24px 40px -24px rgba(3,27,54,.55);transform:none}
+.uni-tab[aria-selected="true"] .n{background:var(--amarillo);color:var(--navy-900)}
+.uni-tab[aria-selected="true"] small{color:rgba(255,255,255,.62)}
+.uni-tab[aria-selected="true"] svg{color:var(--amarillo);transform:translateX(4px)}
+
+.uni-panel{border-radius:var(--radio);background:var(--fondo);border:1px solid var(--linea);overflow:hidden}
+.uni-panel[hidden]{display:none}
+.uni-panel.entra{animation:panelIn .55s var(--ease)}
+@keyframes panelIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.uni-img{background:linear-gradient(180deg,#fff 0%,#eef2f8 100%);aspect-ratio:16/7;display:grid;place-items:center;padding:20px 20px 0;border-bottom:1px solid var(--linea)}
+.uni-img img{height:100%;width:auto;object-fit:contain}
+.uni-cuerpo{padding:30px 34px 34px}
+.uni-cuerpo h3{font-size:1.5rem}
+.uni-cuerpo>p{color:var(--gris);margin:8px 0 22px}
+.productos{list-style:none;display:grid;grid-template-columns:1fr 1fr;column-gap:28px}
+.productos li{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--linea);font-size:.94rem;font-weight:500}
+.productos li::before{content:"";flex:none;width:6px;height:6px;border-radius:2px;background:var(--amarillo);box-shadow:0 0 0 3px rgba(255,203,5,.2)}
+.uni-pie{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:26px;flex-wrap:wrap}
+.uni-pie span{font-size:.86rem;color:var(--gris)}
+.enlace{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--navy)}
+.enlace svg{width:18px;height:18px;transition:transform .25s var(--ease)}
+.enlace:hover svg{transform:translateX(4px)}
+
+/* ---------- Equipo ---------- */
+.equipo-sec{background:var(--fondo)}
+.equipo-foto{position:relative;border-radius:var(--radio);overflow:hidden;aspect-ratio:1624/521;box-shadow:0 40px 80px -50px rgba(3,27,54,.5)}
+.equipo-foto img{width:100%;height:100%;object-fit:cover}
+.equipo-marcas{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+.marca{background:#fff;border:1px solid var(--linea);border-radius:18px;padding:20px 22px;display:flex;gap:14px;align-items:center}
+.marca b{flex:none;width:40px;height:40px;border-radius:12px;background:var(--navy-900);color:var(--amarillo);display:grid;place-items:center;font-size:.85rem}
+.marca strong{display:block;font-size:1rem}
+.marca span{font-size:.85rem;color:var(--gris)}
+
+/* ---------- Cifras ---------- */
+.cifras{background:var(--navy-900);color:#fff}
+.cifras .eyebrow{color:rgba(255,255,255,.75)}
+.cifras .intro-sec{color:rgba(255,255,255,.65)}
+.cifras-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.cifra{padding:30px 30px 32px;border-radius:20px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);transition:background .3s,border-color .3s}
+.cifra:hover{background:rgba(255,255,255,.07);border-color:rgba(255,203,5,.4)}
+.cifra .etq{font-size:.74rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.cifra .num{display:flex;align-items:baseline;gap:8px;font-weight:800;font-size:clamp(2.8rem,4.6vw,3.8rem);line-height:1;margin:16px 0 12px;letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:var(--amarillo)}
+.cifra .num small{font-size:.38em;font-weight:700;color:rgba(255,255,255,.7);letter-spacing:0}
+.cifra p{color:rgba(255,255,255,.72);font-size:.94rem}
+
+/* ---------- Video ---------- */
+.video-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:64px;align-items:center}
+.video-grid .intro-sec{margin:20px 0 26px}
+.video-lista{list-style:none;display:grid;gap:12px;margin-bottom:34px}
+.video-lista li{display:flex;gap:12px;align-items:center;font-weight:600}
+.video-lista li::before{content:"";flex:none;width:22px;height:22px;border-radius:50%;background:var(--amarillo-suave) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23004a8f' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E") center/12px no-repeat}
+.reproductor{position:relative;border-radius:var(--radio);overflow:hidden;aspect-ratio:16/9;background:var(--navy-900);box-shadow:0 40px 80px -45px rgba(3,27,54,.6);cursor:pointer}
+.reproductor img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease)}
+.reproductor:hover img{transform:scale(1.03)}
+.reproductor::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(3,27,54,.6),rgba(3,27,54,0) 50%);pointer-events:none}
+.play{position:absolute;inset:0;margin:auto;width:84px;height:84px;border-radius:50%;background:var(--amarillo);border:0;display:grid;place-items:center;z-index:2;cursor:pointer;animation:onda 2.4s ease-out infinite;transition:transform .25s var(--ease)}
+.play:hover{transform:scale(1.08)}
+.play svg{width:28px;height:28px;margin-left:4px;fill:var(--navy-900)}
+@keyframes onda{0%{box-shadow:0 0 0 0 rgba(255,203,5,.55)}100%{box-shadow:0 0 0 26px rgba(255,203,5,0)}}
+.reproductor .rotulo{position:absolute;left:24px;bottom:20px;z-index:2;color:#fff;font-weight:600;font-size:.9rem}
+.reproductor iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:3}
+
+/* ---------- CTA ---------- */
+.cta{background:var(--navy);color:#fff;border-radius:32px;padding:60px 64px;display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center;position:relative;overflow:hidden}
+.cta::before{content:"";position:absolute;right:-90px;top:-90px;width:300px;height:300px;border-radius:50%;background:var(--amarillo);opacity:.95}
+.cta::after{content:"";position:absolute;right:-90px;top:-90px;width:300px;height:300px;border-radius:50%;box-shadow:0 0 0 40px rgba(255,203,5,.15),0 0 0 80px rgba(255,203,5,.07)}
+.cta>div{position:relative;z-index:1}
+.cta h2{font-size:clamp(1.9rem,3.2vw,2.6rem)}
+.cta p{margin-top:14px;color:rgba(255,255,255,.75);max-width:480px}
+.cta-datos{position:relative;z-index:1;display:grid;gap:10px}
+.dato{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:15px 18px;font-weight:600;backdrop-filter:blur(6px);transition:background .25s,border-color .25s}
+.dato:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.3)}
+.dato svg{width:20px;height:20px;flex:none;color:var(--amarillo)}
+
+/* ---------- Footer ---------- */
+.pie{background:var(--navy-900);color:rgba(255,255,255,.66);padding:80px 0 30px;margin-top:112px}
+.pie-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.1fr;gap:40px}
+.pie h4{font-size:.76rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff;margin-bottom:18px}
+.pie ul{list-style:none;display:grid;gap:10px;font-size:.92rem}
+.pie a:hover{color:var(--amarillo)}
+.pie .logo img{height:42px;margin-bottom:20px}
+.pie-desc{font-size:.92rem;max-width:280px}
+.redes{display:flex;gap:10px;margin-top:22px}
+.redes a{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.18);display:grid;place-items:center;transition:background .2s,border-color .2s,color .2s}
+.redes a:hover{background:var(--amarillo);border-color:var(--amarillo);color:var(--navy-900)}
+.redes svg{width:17px;height:17px}
+.libro{display:inline-block;margin-top:18px;opacity:.9;transition:opacity .2s}
+.libro:hover{opacity:1}
+.libro img{height:72px;width:auto}
+.pie-base{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:60px;padding-top:24px;border-top:1px solid rgba(255,255,255,.08);font-size:.84rem}
+
+/* ---------- Reveal ---------- */
+.js .rv{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s var(--ease)}
+.js .rv.visto{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition:none!important}
+  .js .rv{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1080px){
+  .pie-grid{grid-template-columns:1fr 1fr}
+  .uni{grid-template-columns:1fr 1.3fr}
+  .uni-tab small{display:none}
+}
+@media (max-width:900px){
+  .menu,.cabecera .btn{display:none}
+  .hamburguesa{display:grid;place-items:center}
+  .cabecera.abierta{background:var(--navy-900)}
+  .cabecera.abierta .menu{display:flex;position:absolute;top:80px;left:0;right:0;flex-direction:column;align-items:stretch;background:var(--navy-900);padding:12px 16px 24px;border-top:1px solid rgba(255,255,255,.08)}
+  .cabecera.abierta .menu a{padding:14px 12px;font-size:1.05rem}
+  .seccion{padding:84px 0}
+  .hero{padding-top:120px}
+  .hero-grid{grid-template-columns:1fr;gap:40px}
+  .hero-sellos{grid-template-columns:repeat(2,1fr);margin-top:56px}
+  .sello,.sello+.sello{padding:22px 16px 24px}
+  .sello:nth-child(odd){padding-left:0;border-left:0}
+  .sello:nth-child(-n+2){border-bottom:1px solid rgba(255,255,255,.1)}
+  .cabeza-sec{flex-direction:column;align-items:flex-start;gap:16px;margin-bottom:40px}
+  .uni{grid-template-columns:1fr}
+  .uni-tabs{grid-template-columns:1fr 1fr}
+  .uni-tab{grid-template-columns:1fr;gap:10px;padding:16px}
+  .uni-tab svg{display:none}
+  .uni-tab:hover{transform:none}
+  .uni-tab strong{font-size:.95rem;line-height:1.3}
+  .equipo-foto{aspect-ratio:16/9}
+  .equipo-marcas,.cifras-grid{grid-template-columns:1fr 1fr}
+  .video-grid,.cta{grid-template-columns:1fr}
+  .cta{padding:44px 28px}
+}
+@media (max-width:560px){
+  .cifras-grid,.pie-grid,.equipo-marcas{grid-template-columns:1fr}
+  .productos{grid-template-columns:1fr}
+  .uni-cuerpo{padding:24px 22px 26px}
+  .sello strong{font-size:1.25rem}
+  .equipo-foto{aspect-ratio:5/4}
+  .equipo-foto img{object-position:center 25%}
+  .tablero{padding:20px 14px 12px}
+  .cta::before,.cta::after{width:120px;height:120px;right:-60px;top:-60px}
+}
+</style>
+</head>
+<body class="cargando">
+
+<!-- Cargador: la corriente recorre el circuito y enciende el foco de marca -->
+<div id="cargador" role="status" aria-live="polite">
+  <div class="carga-centro">
+    <svg class="carga-circuito" viewBox="0 0 340 80" aria-hidden="true">
+      <path class="via" d="M12 40 H120 l10 -20 l16 40 l16 -40 l16 40 l10 -20 H282"/>
+      <path class="corriente" d="M12 40 H120 l10 -20 l16 40 l16 -40 l16 40 l10 -20 H282"/>
+      <circle class="halo" cx="300" cy="40" r="16"/>
+      <circle class="foco" cx="300" cy="40" r="16"/>
+      <circle cx="12" cy="40" r="5" fill="#ffcb05"/>
+    </svg>
+    <img class="carga-logo" src="img/logo.png" alt="Grupo SIGELEC" width="262" height="63">
+    <span class="carga-txt">Energizando <b id="carga-pct">0%</b></span>
+  </div>
+</div>
+
+<header class="cabecera" id="cabecera">
+  <div class="envoltura">
+    <a href="https://gruposigelec.com.pe/" class="logo" aria-label="Grupo SIGELEC, inicio"><img src="img/logo.png" alt="Grupo SIGELEC" width="262" height="63"></a>
+    <nav class="menu" id="menu" aria-label="Principal">
+      <a href="https://gruposigelec.com.pe/index.html" class="activo">Inicio</a>
+      <a href="https://gruposigelec.com.pe/nosotros.html">Nosotros</a>
+      <a href="https://gruposigelec.com.pe/marcas.html">Marcas</a>
+      <a href="https://gruposigelec.com.pe/infraestructura.html">Infraestructura</a>
+      <a href="https://gruposigelec.com.pe/eventos.html">Eventos</a>
+      <a href="https://gruposigelec.com.pe/contacto.html">Contacto</a>
+    </nav>
+    <a href="https://gruposigelec.com.pe/contacto.html" class="btn btn-amarillo">Solicitar cotización
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <button class="hamburguesa" id="hamburguesa" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<main>
+<!-- HERO -->
+<section class="hero">
+  <div class="envoltura">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow rv">Grupo SIGELEC · Perú · desde 1995</span>
+        <h1 class="rv">Energía confiable para la <span>industria</span> que no se detiene</h1>
+        <p class="lead rv">Distribuimos, fabricamos y ejecutamos soluciones eléctricas de baja y media tensión: del material que necesitas hoy al proyecto integral llave en mano.</p>
+        <div class="hero-acciones rv">
+          <a href="#unidades" class="btn btn-amarillo">Conoce nuestras soluciones
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a href="https://gruposigelec.com.pe/contacto.html" class="btn btn-linea">Hablar con un asesor</a>
+        </div>
+      </div>
+
+      <div class="tablero rv">
+        <div class="tablero-tit"><span>Unifilar · Grupo SIGELEC</span><i>En servicio</i></div>
+        <svg class="diagrama" viewBox="0 0 520 380" role="img" aria-label="Diagrama unifilar: una red alimenta las cuatro unidades de negocio">
+          <path class="base" d="M260 0 V58"/>
+          <circle class="trafo" cx="260" cy="80" r="22"/>
+          <circle class="trafo" cx="260" cy="110" r="22"/>
+          <text class="rot" x="296" y="100">MT / BT</text>
+          <path class="base" d="M260 132 V180"/>
+          <path class="base barra" d="M65 180 H455"/>
+          <path class="base" d="M65 180 V270 M195 180 V270 M325 180 V270 M455 180 V270"/>
+          <g stroke="rgba(255,255,255,.5)" stroke-width="2.5" stroke-linecap="round">
+            <path d="M65 228 l14 -20"/><path d="M195 228 l14 -20"/><path d="M325 228 l14 -20"/><path d="M455 228 l14 -20"/>
+          </g>
+          <path class="pulso" d="M260 0 V180 H65 V270"/>
+          <path class="pulso" style="animation-delay:-.9s" d="M260 0 V180 H195 V270"/>
+          <path class="pulso" style="animation-delay:-1.8s" d="M260 0 V180 H325 V270"/>
+          <path class="pulso" style="animation-delay:-2.7s" d="M260 0 V180 H455 V270"/>
+          <circle class="nodo" cx="260" cy="180" r="6"/>
+          <g class="carga" data-ir="0" tabindex="0" role="link" aria-label="Ver Distribución tradicional">
+            <rect x="10" y="270" width="110" height="78" rx="14"/><text class="num" x="65" y="300" text-anchor="middle">01</text><text x="65" y="325" text-anchor="middle">Distribución</text></g>
+          <g class="carga" data-ir="1" tabindex="0" role="link" aria-label="Ver Distribución de representaciones">
+            <rect x="140" y="270" width="110" height="78" rx="14"/><text class="num" x="195" y="300" text-anchor="middle">02</text><text x="195" y="325" text-anchor="middle">Representac.</text></g>
+          <g class="carga" data-ir="2" tabindex="0" role="link" aria-label="Ver Planta industrial">
+            <rect x="270" y="270" width="110" height="78" rx="14"/><text class="num" x="325" y="300" text-anchor="middle">03</text><text x="325" y="325" text-anchor="middle">Planta</text></g>
+          <g class="carga" data-ir="3" tabindex="0" role="link" aria-label="Ver Proyectos integrales">
+            <rect x="400" y="270" width="110" height="78" rx="14"/><text class="num" x="455" y="300" text-anchor="middle">04</text><text x="455" y="325" text-anchor="middle">Proyectos</text></g>
+        </svg>
+      </div>
+    </div>
+
+    <div class="hero-sellos">
+      <div class="sello"><strong>+30 años</strong><span>en el mercado eléctrico</span></div>
+      <div class="sello"><strong>ISO 9001</strong><span>Sistema de gestión certificado</span></div>
+      <div class="sello"><strong>90 marcas</strong><span>a disposición del mercado</span></div>
+      <div class="sello"><strong>3 marcas</strong><span>comerciales en un solo grupo</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- UNIDADES -->
+<section class="seccion" id="unidades">
+  <div class="envoltura">
+    <div class="cabeza-sec">
+      <div>
+        <span class="eyebrow rv">Unidades de negocio</span>
+        <h2 class="titulo-sec rv">Cuatro capacidades,<br>un solo aliado eléctrico</h2>
+      </div>
+      <p class="intro-sec rv">Desde el suministro de un cable hasta la entrega de una subestación completa: cubrimos todo el ciclo de tu proyecto.</p>
+    </div>
+
+    <div class="uni rv">
+      <div class="uni-tabs" role="tablist" aria-label="Unidades de negocio">
+        <button class="uni-tab" role="tab" id="t0" aria-controls="p0" aria-selected="true"><span class="n">01</span><span><strong>Distribución tradicional</strong><small>Material eléctrico para obra e industria</small></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <button class="uni-tab" role="tab" id="t1" aria-controls="p1" aria-selected="false" tabindex="-1"><span class="n">02</span><span><strong>Distribución de representaciones</strong><small>Marcas especializadas que representamos</small></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <button class="uni-tab" role="tab" id="t2" aria-controls="p2" aria-selected="false" tabindex="-1"><span class="n">03</span><span><strong>Planta industrial</strong><small>Tableros y salas eléctricas fabricados a medida</small></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <button class="uni-tab" role="tab" id="t3" aria-controls="p3" aria-selected="false" tabindex="-1"><span class="n">04</span><span><strong>Proyectos integrales</strong><small>Ingeniería y ejecución llave en mano</small></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+
+      <div>
+        <article class="uni-panel" role="tabpanel" id="p0" aria-labelledby="t0">
+          <div class="uni-img"><img src="img/inicio4.png" alt="Equipos de distribución eléctrica"></div>
+          <div class="uni-cuerpo">
+            <h3>Distribución tradicional</h3>
+            <p>Stock de material eléctrico para obra, mantenimiento e industria.</p>
+            <ul class="productos"><li>Equipamiento</li><li>Cables eléctricos</li><li>Iluminación</li><li>Equipos de medición</li><li>Accesorios para conductores</li><li>Accionamiento</li><li>Media tensión</li><li>Tubería conduit</li></ul>
+            <div class="uni-pie"><span>8 líneas de producto</span><a class="enlace" href="https://gruposigelec.com.pe/marcas.html">Ver marcas <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          </div>
+        </article>
+        <article class="uni-panel" role="tabpanel" id="p1" aria-labelledby="t1" hidden>
+          <div class="uni-img"><img src="img/inicio3.png" alt="Productos de marcas representadas" loading="lazy"></div>
+          <div class="uni-cuerpo">
+            <h3>Distribución de representaciones</h3>
+            <p>Soluciones especializadas de las marcas que representamos en el Perú.</p>
+            <ul class="productos"><li>Neumática</li><li>Variador de frecuencia</li><li>Seguridad eléctrica</li><li>Celdas en media tensión</li><li>Iluminación minera</li><li>Iluminación inteligente</li><li>Dispositivos de seguridad</li><li>Coplas mineras</li><li>Climatización de tableros</li></ul>
+            <div class="uni-pie"><span>9 líneas de producto</span><a class="enlace" href="https://gruposigelec.com.pe/marcas.html">Ver marcas <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          </div>
+        </article>
+        <article class="uni-panel" role="tabpanel" id="p2" aria-labelledby="t2" hidden>
+          <div class="uni-img"><img src="img/inicio2.png" alt="Tableros fabricados en planta" loading="lazy"></div>
+          <div class="uni-cuerpo">
+            <h3>Planta industrial</h3>
+            <p>Fabricación propia de tableros y salas eléctricas a la medida de tu operación.</p>
+            <ul class="productos"><li>Sala eléctrica</li><li>Subestación eléctrica móvil</li><li>Tablero de transferencia</li><li>Switchgear en baja tensión</li><li>Switchgear en media tensión</li><li>Tablero sobre skid</li><li>Tablero con VFD</li><li>Tablero con soft start</li><li>Banco de condensadores</li><li>Centro de control de motores</li></ul>
+            <div class="uni-pie"><span>10 soluciones fabricadas</span><a class="enlace" href="https://gruposigelec.com.pe/infraestructura.html">Ver infraestructura <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          </div>
+        </article>
+        <article class="uni-panel" role="tabpanel" id="p3" aria-labelledby="t3" hidden>
+          <div class="uni-img"><img src="img/inicio1.png" alt="Proyecto eléctrico integral" loading="lazy"></div>
+          <div class="uni-cuerpo">
+            <h3>Proyectos integrales</h3>
+            <p>Ingeniería, suministro y montaje de instalaciones eléctricas completas.</p>
+            <ul class="productos"><li>Subestaciones eléctricas</li><li>Transformadores en MT</li><li>Celdas en BT</li><li>Cables en MT y BT</li><li>Bandejas</li><li>Tableros principales de distribución</li><li>Banco de condensadores</li><li>Iluminación</li><li>Detección y extinción de incendios</li></ul>
+            <div class="uni-pie"><span>Llave en mano</span><a class="enlace" href="https://gruposigelec.com.pe/contacto.html">Cotizar un proyecto <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPO -->
+<section class="seccion equipo-sec" aria-labelledby="t-equipo">
+  <div class="envoltura">
+    <div class="cabeza-sec">
+      <div>
+        <span class="eyebrow rv">Nuestro equipo</span>
+        <h2 class="titulo-sec rv" id="t-equipo">Personas que conocen<br>cada circuito</h2>
+      </div>
+      <p class="intro-sec rv">Ingenieros, técnicos y asesores comerciales que acompañan tu proyecto de principio a fin, trabajando como un solo grupo.</p>
+    </div>
+    <div class="equipo-foto rv"><img src="img/PORTADA.jpg" alt="Equipo de Grupo SIGELEC frente a tableros eléctricos" width="1624" height="521"></div>
+    <div class="equipo-marcas">
+      <div class="marca rv"><b>SC</b><div><strong>SIGELEC Comercial</strong><span>Marca comercial del grupo</span></div></div>
+      <div class="marca rv"><b>SS</b><div><strong>SIGELEC Soluciones</strong><span>Marca comercial del grupo</span></div></div>
+      <div class="marca rv"><b>TC</b><div><strong>TECNOCONTROL</strong><span>Marca comercial del grupo</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CIFRAS -->
+<section class="seccion cifras">
+  <div class="envoltura">
+    <div class="cabeza-sec">
+      <div>
+        <span class="eyebrow rv">Grupo SIGELEC en cifras</span>
+        <h2 class="titulo-sec rv">Capacidad comprobada,<br>año tras año</h2>
+      </div>
+      <p class="intro-sec rv">Respaldo operativo y logístico para abastecer a la industria, la minería y la construcción en el Perú.</p>
+    </div>
+    <div class="cifras-grid">
+      <div class="cifra rv"><span class="etq">Desde</span><span class="num">1995</span><p>Más de tres décadas acompañando proyectos eléctricos.</p></div>
+      <div class="cifra rv"><span class="etq">SKU entregados</span><span class="num"><b data-contar="6500">6500</b><small>/ año</small></span><p>SKU entregados a nuestros clientes cada año.</p></div>
+      <div class="cifra rv"><span class="etq">Planta industrial</span><span class="num"><b data-contar="120">120</b><small>t / año</small></span><p>Toneladas de fierro trabajadas en nuestra planta.</p></div>
+      <div class="cifra rv"><span class="etq">Marcas comerciales</span><span class="num"><b data-contar="3" data-ceros="2">03</b></span><p>SIGELEC Comercial, SIGELEC Soluciones y TECNOCONTROL.</p></div>
+      <div class="cifra rv"><span class="etq">Portafolio</span><span class="num"><b data-contar="90">90</b><small>marcas</small></span><p>Marcas a disposición del mercado.</p></div>
+      <div class="cifra rv"><span class="etq">Certificación</span><span class="num">ISO<small>9001</small></span><p>Calidad respaldada por un sistema integrado de gestión.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section class="seccion" id="video">
+  <div class="envoltura video-grid">
+    <div>
+      <span class="eyebrow rv">Video institucional</span>
+      <h2 class="titulo-sec rv">Conoce SIGELEC por dentro</h2>
+      <p class="intro-sec rv">Recorre nuestra planta, conoce a las personas detrás de cada tablero y descubre cómo trabajamos para que tu energía nunca falle.</p>
+      <ul class="video-lista rv">
+        <li>Planta de fabricación de tableros propia</li>
+        <li>Stock permanente de las principales marcas</li>
+        <li>Ingeniería y ejecución de proyectos llave en mano</li>
+      </ul>
+      <a href="https://gruposigelec.com.pe/nosotros.html" class="btn btn-navy rv">Más sobre nosotros
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <div class="reproductor rv" id="reproductor" data-video="Q1njHqiUUJc">
+      <img src="img/VIDEO-FOTO.jpg" alt="Técnico de SIGELEC operando una plegadora en la planta">
+      <button class="play" aria-label="Reproducir video institucional"><svg viewBox="0 0 24 24"><path d="M6 4l15 8-15 8z"/></svg></button>
+      <span class="rotulo">Video institucional · Grupo SIGELEC</span>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="envoltura">
+  <div class="cta rv">
+    <div>
+      <h2>¿Tienes un proyecto eléctrico en marcha?</h2>
+      <p>Cuéntanos qué necesitas y un asesor te contactará con una propuesta técnica y comercial.</p>
+    </div>
+    <div class="cta-datos">
+      <a class="dato" href="tel:+5117174200"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>+51 717 4200</a>
+      <a class="dato" href="mailto:ventas@gruposigelec.com.pe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>ventas@gruposigelec.com.pe</a>
+      <a class="dato" href="https://maps.google.com/?q=Av.+Oscar+R.+Benavides+5289,+Lima" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>Av. Oscar R. Benavides 5289</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="pie">
+  <div class="envoltura">
+    <div class="pie-grid">
+      <div>
+        <a href="https://gruposigelec.com.pe/" class="logo"><img src="img/logo.png" alt="Grupo SIGELEC"></a>
+        <p class="pie-desc">Soluciones eléctricas integrales para la industria peruana desde 1995.</p>
+        <div class="redes">
+          <a href="https://www.facebook.com/sigelec.peru" aria-label="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H8v4h2v8h4v-8h3l1-4h-4V8z"/></svg></a>
+          <a href="https://www.linkedin.com/company/grupo-sigelec/" aria-label="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 3a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM2 9h4v12H2zM9 9h4v1.7c.6-1 1.9-2 4-2 4 0 5 2.4 5 6V21h-4v-5.5c0-1.5-.3-3-2.2-3-2 0-2.8 1.4-2.8 3V21H9z"/></svg></a>
+          <a href="https://www.instagram.com/sigelec.peru/" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4>Secciones</h4>
+        <ul>
+          <li><a href="https://gruposigelec.com.pe/nosotros.html">Nosotros</a></li>
+          <li><a href="https://gruposigelec.com.pe/marcas.html">Marcas</a></li>
+          <li><a href="https://gruposigelec.com.pe/infraestructura.html">Infraestructura</a></li>
+          <li><a href="https://gruposigelec.com.pe/eventos.html">Eventos</a></li>
+          <li><a href="https://gruposigelec.com.pe/contacto.html">Contacto</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contáctanos</h4>
+        <ul>
+          <li><a href="tel:+5117174200">+51 717 4200</a></li>
+          <li><a href="mailto:ventas@gruposigelec.com.pe">ventas@gruposigelec.com.pe</a></li>
+          <li>Av. Oscar R. Benavides 5289</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Atención al cliente</h4>
+        <ul>
+          <li><a href="https://gruposigelec.com.pe/politica-privacidad.html">Política de privacidad</a></li>
+          <li><a href="https://gruposigelec.com.pe/politica-gestion.html">Políticas del sistema integrado de gestión</a></li>
+        </ul>
+        <a class="libro" href="https://gruposigelec.com.pe/reclamacion.html" aria-label="Libro de reclamaciones"><img src="img/libro.png" alt="Libro de reclamaciones"></a>
+      </div>
+    </div>
+    <div class="pie-base">
+      <span>© <span id="anio">2026</span> Grupo SIGELEC. Todos los derechos reservados.</span>
+      <span>Certificación ISO 9001</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const reducir = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+
+  /* ---- Cargador ---- */
+  const cargador = $('#cargador'), pct = $('#carga-pct');
+  const minimo = reducir ? 300 : 2100, t0 = performance.now();
+  let listo = document.readyState === 'complete';
+  addEventListener('load', () => listo = true);
+  setTimeout(() => listo = true, 5000); // por si alguna imagen tarda demasiado
+  const avanzar = t => {
+    const tiempo = Math.min(1, (t - t0) / minimo);
+    const p = listo ? tiempo : Math.min(tiempo, .9);
+    const v = Math.round(p * 100);
+    pct.textContent = v + '%';
+    cargador.style.setProperty('--p', p);
+    if (p < 1) return requestAnimationFrame(avanzar);
+    setTimeout(() => {
+      cargador.classList.add('fuera');
+      document.body.classList.remove('cargando');
+      iniciarReveal();
+      setTimeout(() => cargador.remove(), 1100);
+    }, 250);
+  };
+  requestAnimationFrame(avanzar);
+
+  /* ---- Header ---- */
+  const cab = $('#cabecera'), ham = $('#hamburguesa');
+  const onScroll = () => cab.classList.toggle('solida', scrollY > 40);
+  addEventListener('scroll', onScroll, {passive:true}); onScroll();
+  ham.addEventListener('click', () => ham.setAttribute('aria-expanded', cab.classList.toggle('abierta')));
+  $$('#menu a').forEach(a => a.addEventListener('click', () => cab.classList.remove('abierta')));
+  $('#anio').textContent = new Date().getFullYear();
+
+  /* ---- Reveal escalonado ---- */
+  function iniciarReveal() {
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return;
+      const hermanos = [...e.target.parentElement.children].filter(n => n.classList.contains('rv'));
+      e.target.style.transitionDelay = Math.max(0, hermanos.indexOf(e.target)) * 90 + 'ms';
+      e.target.classList.add('visto');
+      io.unobserve(e.target);
+    }), {threshold:.12, rootMargin:'0px 0px -40px 0px'});
+    $$('.rv').forEach(el => io.observe(el));
+  }
+
+  /* ---- Pestañas de unidades ---- */
+  const tabs = $$('.uni-tab');
+  const activar = (i, foco) => {
+    tabs.forEach((t, j) => {
+      const on = i === j, panel = document.getElementById(t.getAttribute('aria-controls'));
+      t.setAttribute('aria-selected', on);
+      t.tabIndex = on ? 0 : -1;
+      panel.hidden = !on;
+      if (on) { panel.classList.remove('entra'); void panel.offsetWidth; panel.classList.add('entra'); }
+    });
+    if (foco) tabs[i].focus();
+  };
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => activar(i));
+    t.addEventListener('keydown', e => {
+      const d = {ArrowDown:1, ArrowRight:1, ArrowUp:-1, ArrowLeft:-1}[e.key];
+      if (d) { e.preventDefault(); activar((i + d + tabs.length) % tabs.length, true); }
+    });
+  });
+  // Las cargas del diagrama del hero abren su unidad
+  $$('.carga').forEach(g => {
+    const ir = () => { activar(+g.dataset.ir); $('#unidades').scrollIntoView({behavior: reducir ? 'auto' : 'smooth'}); };
+    g.addEventListener('click', ir);
+    g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); ir(); } });
+  });
+
+  /* ---- Contadores ---- */
+  const contar = el => {
+    const fin = +el.dataset.contar, ceros = +(el.dataset.ceros || 0), dur = 1600, ini = performance.now();
+    const paso = t => {
+      const p = Math.min(1, (t - ini) / dur);
+      el.textContent = String(Math.round(fin * (1 - Math.pow(1 - p, 3)))).padStart(ceros, '0');
+      if (p < 1) requestAnimationFrame(paso);
+    };
+    requestAnimationFrame(paso);
+  };
+  if (!reducir) {
+    const ioN = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { contar(e.target); ioN.unobserve(e.target); }
+    }), {threshold:.6});
+    $$('[data-contar]').forEach(el => ioN.observe(el));
+  }
+
+  /* ---- Video bajo demanda ---- */
+  const rep = $('#reproductor');
+  rep.addEventListener('click', () => {
+    if (rep.querySelector('iframe')) return;
+    const f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/' + rep.dataset.video + '?autoplay=1&rel=0';
+    f.title = 'Video institucional Grupo SIGELEC';
+    f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+    f.allowFullscreen = true;
+    rep.appendChild(f);
+  });
+})();
+</script>
+</body>
+</html>
